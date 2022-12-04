@@ -1,5 +1,5 @@
-import CharactersList from "../routes/characters/components/characters-list";
 import Pagination from "./pagination";
 import Layout from "./layout";
+import ErrorMessage from "./error-message";
 
-export { CharactersList, Pagination, Layout };
+export { Pagination, Layout, ErrorMessage };

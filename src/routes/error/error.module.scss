@@ -1,0 +1,22 @@
+.error {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+}
+
+.errorStatus {
+  font-size: 100px;
+  line-height: 1;
+  font-weight: bold;
+  @media screen and (max-width: 700px) {
+    font-size: 50px;
+  }
+}
+
+.errorText {
+  font-size: 40px;
+  font-weight: normal;
+}

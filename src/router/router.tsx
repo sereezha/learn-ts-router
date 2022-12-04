@@ -1,6 +1,5 @@
 import { createBrowserRouter, redirect } from "react-router-dom";
-import ErrorPage from "../error-page";
-import { Character, Characters } from "../routes";
+import { Character, Characters, ErrorPage } from "../routes";
 import { getIdFromUrl } from "../helpers";
 import { requests } from "../api";
 import { routesMap } from "./helpers";
@@ -10,6 +9,7 @@ const { getCharacter, getLocation, getEpisodes } = requests;
 const router = createBrowserRouter([
   {
     path: "/",
+    errorElement: <ErrorPage />,
     loader: async () => {
       return redirect(routesMap.characters.url);
     },
@@ -24,8 +24,10 @@ const router = createBrowserRouter([
     element: <Character />,
     loader: async ({ params: { characterId } }) => {
       const character = await getCharacter(+characterId!);
-      const episodes = await getEpisodes(character.episodes);
-      const location = await getLocation(+getIdFromUrl(character.origin.url));
+      const [episodes, location] = await Promise.allSettled([
+        getEpisodes(character.episodes),
+        getLocation(+getIdFromUrl(character.origin.url)),
+      ]);
 
       return { character, episodes, location };
     },

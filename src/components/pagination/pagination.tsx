@@ -9,7 +9,7 @@ interface Props {
 }
 
 const Pagination = (props: Props) => {
-  const { forcePage, pagesAmount, initialPage = 1, onPageChange } = props;
+  const { forcePage, pagesAmount, onPageChange } = props;
 
   const handlePageChange = (event: { selected: number }) => {
     onPageChange((event.selected + 1).toString());
@@ -28,7 +28,6 @@ const Pagination = (props: Props) => {
       pageRangeDisplayed={10}
       pageCount={pagesAmount}
       previousLabel="Previous"
-      initialPage={initialPage - 1}
       renderOnZeroPageCount={undefined}
       disableInitialCallback
       marginPagesDisplayed={1}

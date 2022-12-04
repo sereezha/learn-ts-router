@@ -43,7 +43,7 @@ const getCharacters = async (
   } = res;
 
   if (res.status === 404) {
-    throw new Error("Not found");
+    throw new Error("No such character");
   }
 
   const characters: ICharacter[] | undefined = results?.map((item) => {

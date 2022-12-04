@@ -89,6 +89,7 @@ h6 {
 #root,
 #__next {
   isolation: isolate;
+  min-height: 100vh;
 }
 
 ul,
