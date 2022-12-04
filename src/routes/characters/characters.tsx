@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { ErrorMessage, Layout, Pagination } from "../../components";
 import { getUrlParam } from "../../helpers";
+import { Status } from "../../types";
 import styles from "./characters.module.scss";
 import { SearchForm, CharactersList } from "./components";
-import useCharacters, { Status } from "./use-characters";
+import useCharacters from "./use-characters";
 
 const INITIAL_PAGE = 1;
 

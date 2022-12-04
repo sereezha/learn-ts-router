@@ -2,21 +2,9 @@ import { useEffect, useReducer } from "react";
 import { useSearchParams } from "react-router-dom";
 import { requests } from "../../api";
 import { getErrorMessage, getUrlParam } from "../../helpers";
-import { ICharacter } from "../../types";
+import { Action, ICharacter, Status } from "../../types";
 
 const { getCharacters } = requests;
-
-enum Action {
-  FETCHING = "FETCHING",
-  SUCCESS = "SUCCESS",
-  ERROR = "ERROR",
-}
-
-export enum Status {
-  IDLE = "IDLE",
-  LOADING = "LOADING",
-  ERROR = "ERROR",
-}
 
 type IAction =
   | { type: Action.FETCHING }
