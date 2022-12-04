@@ -1,0 +1,8 @@
+.layout {
+  --padding: 16px;
+
+  padding: var(--padding);
+  max-width: calc(1440px - var(--padding) * 2);
+  margin: 0 auto;
+  width: 100%;
+}

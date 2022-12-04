@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  gap: 20px;
+  justify-self: center;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.link {
+  padding: 5px 10px;
+  display: block;
+  border: 1px solid #000;
+  border-radius: 10px;
+  cursor: pointer;
+  &[aria-current="page"] {
+    color: #535bf2;
+  }
+}
+
+.prevLink,
+.nextLink,
+.breakLink {
+  cursor: pointer;
+}
