@@ -1,6 +1,6 @@
-import React, { ChangeEvent, FormEvent } from "react";
-import Button from "../../../components/button";
-import Input from "../../../components/input";
+import { ChangeEvent, FormEvent } from "react";
+import Button from "../../../../components/button";
+import Input from "../../../../components/input";
 import styles from "./search-form.module.scss";
 
 interface Props {

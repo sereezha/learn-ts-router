@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { requests } from "../../api";
 import { useSearchParams } from "react-router-dom";
-import { CharactersList, Layout, Pagination } from "../../components";
+import { Layout, Pagination } from "../../components";
 import { getUrlParam } from "../../helpers";
 import styles from "./characters.module.scss";
-import { SearchForm } from "./components";
+import { SearchForm, CharactersList } from "./components";
 import { ICharacter } from "../../types";
 
 const { getCharacters } = requests;
@@ -70,14 +70,16 @@ const Characters = () => {
           onSubmit={handleFormSubmit}
           onValueChange={handleValueChange}
         />
-        {!!characters.length && <CharactersList characters={characters} />}
-        {pagesAmount && (
-          <Pagination
-            forcePage={page}
-            initialPage={page}
-            onPageChange={handlePageClick}
-            pagesAmount={pagesAmount}
-          />
+        {!!characters.length && (
+          <>
+            <CharactersList characters={characters} />
+            <Pagination
+              forcePage={page}
+              initialPage={page}
+              onPageChange={handlePageClick}
+              pagesAmount={pagesAmount}
+            />
+          </>
         )}
       </div>
     </Layout>

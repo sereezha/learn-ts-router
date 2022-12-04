@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { routesMap } from "../../router";
-import { ICharacterListItem } from "../../types";
+import { routesMap } from "../../../../router";
+import { ICharacterListItem } from "../../../../types";
 import styles from "./characters-list.module.scss";
 
 interface Props {
