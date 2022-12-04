@@ -1,6 +1,6 @@
 const routesMap = {
   characters: {
-    url: "characters",
+    url: "/characters",
   },
   character: {
     url: "/character",
