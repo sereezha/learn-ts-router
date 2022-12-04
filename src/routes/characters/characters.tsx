@@ -3,7 +3,7 @@ import { ErrorMessage, Layout, Pagination } from "../../components";
 import { getUrlParam } from "../../helpers";
 import styles from "./characters.module.scss";
 import { SearchForm, CharactersList } from "./components";
-import useCharacters from "./use-characters";
+import useCharacters, { Status } from "./use-characters";
 
 const INITIAL_PAGE = 1;
 
@@ -33,7 +33,7 @@ const Characters = () => {
           onSubmit={() => handleFormSubmit(value)}
           onValueChange={handleValueChange}
         />
-        {!!characters.length && status === "idle" && (
+        {!!characters.length && status === Status.IDLE && (
           <>
             <CharactersList characters={characters} />
             <Pagination
@@ -43,7 +43,7 @@ const Characters = () => {
             />
           </>
         )}
-        {status === "error" && <ErrorMessage>{errorMessage}</ErrorMessage>}
+        {status === Status.ERROR && <ErrorMessage>{errorMessage}</ErrorMessage>}
       </div>
     </Layout>
   );

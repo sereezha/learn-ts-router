@@ -6,54 +6,66 @@ import { ICharacter } from "../../types";
 
 const { getCharacters } = requests;
 
-interface State {
-  characters: ICharacter[];
-  status: "idle" | "loading" | "error";
-  pagesAmount: number;
-  errorMessage: string;
+enum Action {
+  FETCHING = "FETCHING",
+  SUCCESS = "SUCCESS",
+  ERROR = "ERROR",
 }
 
-type Action =
-  | { type: "fetching" }
+export enum Status {
+  IDLE = "IDLE",
+  LOADING = "LOADING",
+  ERROR = "ERROR",
+}
+
+type IAction =
+  | { type: Action.FETCHING }
   | {
-      type: "success";
+      type: Action.SUCCESS;
       payload: {
         characters: ICharacter[];
         pagesAmount: number;
       };
     }
   | {
-      type: "error";
+      type: Action.ERROR;
       payload: {
         errorMessage: string;
       };
     };
 
-const initialState: State = {
+interface IState {
+  characters: ICharacter[];
+  status: Status;
+  pagesAmount: number;
+  errorMessage: string;
+}
+
+const initialState: IState = {
   characters: [],
-  status: "idle",
+  status: Status.IDLE,
   pagesAmount: 0,
   errorMessage: "",
 };
 
 const INITIAL_PAGE = 1;
 
-const reducer = (state: State, action: Action): State => {
+const reducer = (state: IState, action: IAction): IState => {
   switch (action.type) {
-    case "fetching":
-      return { ...state, status: "loading", characters: [] };
-    case "success":
+    case Action.FETCHING:
+      return { ...state, status: Status.LOADING, characters: [] };
+    case Action.SUCCESS:
       return {
         ...state,
-        status: "idle",
+        status: Status.IDLE,
         characters: action.payload.characters,
         pagesAmount: action.payload.pagesAmount,
         errorMessage: "",
       };
-    case "error":
+    case Action.ERROR:
       return {
         ...state,
-        status: "error",
+        status: Status.ERROR,
         characters: [],
         errorMessage: action.payload.errorMessage,
       };
@@ -70,7 +82,7 @@ const useCharacters = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
     const fetchCharacters = async () => {
-      dispatch({ type: "fetching" });
+      dispatch({ type: Action.FETCHING });
       try {
         const page = getUrlParam(searchParams, "page");
         const { characters: chars, info } = await getCharacters({
@@ -79,7 +91,7 @@ const useCharacters = () => {
         });
 
         dispatch({
-          type: "success",
+          type: Action.SUCCESS,
           payload: {
             characters: chars!,
             pagesAmount: info!.pages,
@@ -88,7 +100,7 @@ const useCharacters = () => {
       } catch (error) {
         console.error(error);
         dispatch({
-          type: "error",
+          type: Action.ERROR,
           payload: { errorMessage: getErrorMessage(error) },
         });
       }
