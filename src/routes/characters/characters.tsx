@@ -29,14 +29,20 @@ const Characters = () => {
   return (
     <Layout>
       <div className={styles.main}>
+        <h1>Rick and Morty wiki!</h1>
         <SearchForm
           value={value}
           onSubmit={() => handleFormSubmit(value)}
           onValueChange={handleValueChange}
         />
+        {status !== Status.ERROR && (
+          <CharactersList
+            isLoading={status === Status.LOADING}
+            characters={characters}
+          />
+        )}
         {!!characters.length && status === Status.IDLE && (
           <>
-            <CharactersList characters={characters} />
             <Pagination
               forcePage={page ? +page : INITIAL_PAGE}
               onPageChange={handlePageClick}
